@@ -156,9 +156,9 @@ function AddEmployee() {
             <button
               onClick={() => handleAddClick(row._id)}
               type="button"
-              className="py-2 px-4 rounded-md bg-green-700 text-white text-base"
+              className="py-2 px-4 rounded-md uppercase bg-primary font-bold font-roboto text-white "
             >
-              Add
+              Add to team
             </button>
           </div>
         );
@@ -189,11 +189,11 @@ function AddEmployee() {
           </div>
           <div className="flex flex-col justify-center items-center">
             <h2 className="text-lg">
-              You have {usersByCompany.length} employee
+              You have added {usersByCompany.length} employees.
             </h2>
 
             <p className="text-lg my-2 mb-3">
-              <span className="text-green-600">
+              <span className="text-primary">
                 {userData?.packages === "basic"
                   ? "You Are Using 5 Members For $5 Package!"
                   : userData?.packages === "standard"
@@ -204,8 +204,8 @@ function AddEmployee() {
               </span>
             </p>
             <Link to="/increase">
-              <button className="p-2 rounded-md text-lg bg-primary text-white">
-                Increase The Limit
+              <button className="p-2 rounded-md uppercase font-roboto font-bold bg-primary text-white">
+                Increase Limit
               </button>
             </Link>
           </div>
@@ -220,11 +220,11 @@ function AddEmployee() {
           </div>
           {unaffiliatedUsers.length > 0 && (
             <form className="mt-2" onSubmit={handleAddSelectedMembers}>
-              <div className="text-center">
+              <div className="text-center font-roboto">
                 <PrimaryButton
                   buttonType={"submit"}
                   buttonName={"Add Selected Members"}
-                  buttonBGColor={"bg-green-700"}
+                  buttonBGColor={"bg-primary"}
                   buttonTextColor={"text-white"}
                 />
               </div>

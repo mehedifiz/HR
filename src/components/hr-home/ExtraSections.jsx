@@ -25,7 +25,7 @@ function ExtraSections() {
               />
             </div>
             <div>
-              <h3 className="text-2xl font-medium font-lato py-8 w-5/6 md:w-4/6 md:px-0 px-2 mx-auto text-center">
+              <h3 className="text-2xl font-medium font-bold font-lato py-8 w-5/6 md:w-4/6 md:px-0 px-2 mx-auto text-center">
                 Please email us right away if you experience any problems with
                 this software.
               </h3>
@@ -62,8 +62,8 @@ function ExtraSections() {
                   ></textarea>
                 </div>
                 <button
-                  type="submit"
-                  className="w-full p-2 text-sm font-bold tracking-wide uppercase rounded"
+                  disabled
+                  className="w-full p-3 text-sm font-lato bg-primary text-white font-bold tracking-wide uppercase rounded"
                 >
                   Send Message
                 </button>
