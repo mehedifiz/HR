@@ -1,23 +1,24 @@
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "./useAxiosSecure";
 
-import useAxiosPublic from './useAxiosPublic';
-import { useQuery } from '@tanstack/react-query';
-import useCurrentUser from './useCurrentUser';
+function useAssets() {
+  const axiosSecure = useAxiosSecure();
 
-const useAssets = () => {
-    const axiosPublic = useAxiosPublic();
-    const [currentUser] = useCurrentUser();
-  
-  const {data: assets = [], isPending: loading, refetch} = useQuery({
-    queryKey: 'assets',
-    enabled: !!currentUser?.email, 
-    queryFn: async ()=>{
-      const res = await axiosPublic.get(`/assets/${currentUser?.email}`);
-      return res.data;
-    }
-  })
+  const {
+    data: assets = [],
+    isLoading,
+    refetch,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["assets"],
+    queryFn: async () => {
+      const response = await axiosSecure.get("/assets");
+      return response.data;
+    },
+  });
 
-
-  return [assets, loading, refetch]
-};
+  return { assets, isLoading, refetch, isError, error };
+}
 
 export default useAssets;

@@ -9,7 +9,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Link } from "react-router-dom";
 
-const Banner = () => {
+const Slider = () => {
   return (
     <div className="">
       <Swiper
@@ -29,7 +29,7 @@ const Banner = () => {
                 strategic HR management? Join us as an HR Manager and lead the
                 way in creating a thriving workplace culture.
               </p>
-              <Link to="/hr-signup">
+              <Link to="/join-as-hr">
                 <button className="px-3 md:py-3 py-2 lg:text-base md:text-sm text-xs bg-primary text-white font-roboto font-bold uppercase">
                   Join as HR Manager
                 </button>
@@ -49,7 +49,7 @@ const Banner = () => {
                 strategic HR management? Join us as an HR Manager and lead the
                 way in creating a thriving workplace culture.
               </p>
-              <Link to="/employee-signup">
+              <Link to="/join-as-employee">
                 <button className="px-3 md:py-3 py-2 lg:text-base md:text-sm text-xs bg-primary text-white font-roboto font-bold uppercase">
                   Join as Employee
                 </button>
@@ -63,4 +63,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default Slider;

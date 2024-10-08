@@ -1,18 +1,18 @@
-
-import { Outlet, useLocation } from 'react-router-dom';
-import Navbar from '../shared/Navbar';
-import Footer from '../shared/Footer';
+import { Outlet } from "react-router-dom";
+import Footer from "../shared/Footer";
+import Navbar from "../components/navbar/Navbar";
 
 const Root = () => {
-    const location = useLocation();
-  const isLoginPage = location.pathname.includes('payment')
-    return (
-        <div>
-            {isLoginPage || <Navbar></Navbar>}
-            <Outlet></Outlet>
-            <Footer></Footer>
-        </div>
-    );
+  return (
+    <div>
+      <Navbar></Navbar>
+      <div className="min-h-[calc(100vh-80px)]">
+        <Outlet></Outlet>
+      </div>
+
+      <Footer></Footer>
+    </div>
+  );
 };
 
 export default Root;

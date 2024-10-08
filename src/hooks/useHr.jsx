@@ -1,22 +1,19 @@
-import { useContext } from "react";
-import { AuthContext } from "../providers/AuthProvider";
-import useAxiosSecure from "./useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import useAuth from "./useAuth";
+import useAxiosPublic from "./useAxiosPublic";
 
-const useHR = () => {
-    const { user } = useContext(AuthContext);
-    const axiosSecure = useAxiosSecure();
-
+function useHR() {
+    const { user } = useAuth();
+    const axiosPublic = useAxiosPublic();
     const { data: isHR, isPending: isHRLoading } = useQuery({
-        queryKey: [user?.email, 'isHR'],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/user/hr/${user?.email}`);
-            console.log(res.data);
-            return res.data?.isHR;
-        }
+      queryKey: [user?.email, "hr"],
+      enabled: !!user?.email && !!localStorage.getItem("access-token"),
+      queryFn: async () => {
+        const res = await axiosPublic.get(`/users/hr/${user?.email}`);
+        return res.data?.hr;
+      },
     });
-
-    return [isHR, isHRLoading];
-};
-
-export default useHR;
+    return { isHR, isHRLoading };
+  }
+  
+  export default useHR;

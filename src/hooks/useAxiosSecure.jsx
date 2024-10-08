@@ -1,49 +1,41 @@
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  // baseURL: 'https://asset-server-mu.vercel.app',
-  baseURL: 'http://localhost:8000'
+  baseURL: 'https://asset-server-mu.vercel.app',
 });
 
-const useAxiosSecure = () => {
-  const { logOut } = useContext(AuthContext);
+function useAxiosSecure() {
   const navigate = useNavigate();
+  const { logOut } = useAuth();
 
-  useEffect(() => {
-    const requestInterceptor = axiosSecure.interceptors.request.use(
-      (config) => {
-        const token = localStorage.getItem('access-token');
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
-      },
-      (error) => Promise.reject(error)
-    );
+  axiosSecure.interceptors.request.use(
+    function (config) {
+      const token = localStorage.getItem("access-token");
+      //   console.log("interceptor", token);
+      config.headers.authorization = `Bearer ${token}`;
+      return config;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
 
-    const responseInterceptor = axiosSecure.interceptors.response.use(
-      (response) => response,
-      async (error) => {
-        const status = error.response ? error.response.status : null;
-        if (status === 401 || status === 403) {
-          await logOut();
-          navigate('/login');
-        }
-        return Promise.reject(error);
-      }
-    );
-
-    return () => {
-      axiosSecure.interceptors.request.eject(requestInterceptor);
-      axiosSecure.interceptors.response.eject(responseInterceptor);
-    };
-  }, [logOut, navigate]);
+  axiosSecure.interceptors.response.use(
+    function (response) {
+      return response;
+    },
+    async (error) => {
+      const status = error.response.status;
+      console.log("Status Error", status);
+      await logOut();
+      navigate("/login");
+      return Promise.reject(error);
+    }
+  );
 
   return axiosSecure;
-};
+}
 
 export default useAxiosSecure;
-

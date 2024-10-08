@@ -15,7 +15,7 @@ const About = () => {
             Who We Are?
           </h1>
           <p className="lg:w-5/6 w-full md:px-0 px-2 font-lato lg:text-base text-sm">
-            XYZ Company is a team of passionate professionals dedicated to
+            <span className="font-roboto font-bold uppercase">Asset<span className="text-primary font-lato">H</span>ub</span> Company is a team of passionate professionals dedicated to
             simplifying asset management processes. With years of collective
             experience in software development and a deep understanding of the
             challenges faced by modern businesses, we strive to deliver

@@ -1,94 +1,181 @@
 import { createBrowserRouter } from "react-router-dom";
-import Root from "./../layouts/Root";
-import Home from "../pages/home/Home";
-import EmployeeSignup from "../pages/register/EmployeeSignup";
-import HRManagerSignup from "../pages/register/HRManagerSignup";
-import Login from "../pages/login/Login";
-import Payment from "../pages/payment/Payment";
-import MyAssets from './../pages/myassets/MyAssets';
-import MyTeam from './../pages/myteam/MyTeam';
-import RequestAsset from './../pages/requestasset/RequestAsset';
-import Profile from './../pages/profile/Profile';
-import AssetList from './../pages/assetlist/AssetList';
-import AddAsset from './../pages/addasset/AddAsset';
-import AllRequest from './../pages/allrequest/AllRequest';
-import MyEmployee from './../pages/myemployee.jsx/MyEmployee';
-import AddEmployee from './../pages/addemployee/AddEmployee';
+import Profile from "../pages/profile/Profile";
+import PrivateRoute from "./PrivateRoute";
+import Root from "../layouts/Root";
 import ErrorPage from "../pages/error/ErrorPage";
-import UpdateAsset from '../pages/updateasset/UpdateAsset';
+import JoinAsEmployee from "../pages/register/JoinAsEmployee";
+import JoinAsHR from "../pages/register/JoinAsHR";
+import HRRoute from "./HRRoute";
+import EmployeeRoute from "./EmployeeRoute";
+import Home from "../pages/home/Home";
+import Login from "../pages/login/Login";
+import RequestForAsset from "../pages/employee/RequestForAsset";
+import AddEmployee from "../pages/hr/AddEmployee";
+import EmployeeList from "../pages/hr/EmployeeList";
+import AllRequests from "../pages/hr/AllRequests";
+import EditAsset from "../pages/hr/EditAsset";
+import AssetAdd from "../pages/hr/AssetAdd";
+import AssetList from "../pages/hr/AssetList";
+import IncreaseLimit from "../pages/hr/IncreaseLimit";
+import Payment from "../pages/hr/Payment";
+import MyTeam from "../pages/employee/MyTeam";
+import MyAssets from "../pages/employee/MyAssets";
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
-        path: "/",
+        index: true,
         element: <Home></Home>,
       },
       {
-        path: "/employee-signup",
-        element: <EmployeeSignup></EmployeeSignup>,
+        path: "/join-as-employee",
+        element: <JoinAsEmployee />,
       },
       {
-        path: "/hr-signup",
-        element: <HRManagerSignup></HRManagerSignup>,
+        path: "/join-as-hr",
+        element: <JoinAsHR />,
+      },
+      // Employee
+      {
+        path: "/my-assets",
+        element: (
+          <PrivateRoute>
+            <EmployeeRoute>
+              <MyAssets />
+            </EmployeeRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-team",
+        element: (
+          <PrivateRoute>
+            <EmployeeRoute>
+              <MyTeam />
+            </EmployeeRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/request-for-asset",
+        element: (
+          <PrivateRoute>
+            <EmployeeRoute>
+              <RequestForAsset />
+            </EmployeeRoute>
+          </PrivateRoute>
+        ),
+      },
+      // Employee
+
+      // HR Manager
+      {
+        path: "/payment",
+        element: (
+          <PrivateRoute>
+            <HRRoute>
+              <Payment />
+            </HRRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/increase",
+        element: (
+          <PrivateRoute>
+            <HRRoute>
+              <IncreaseLimit />
+            </HRRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/asset-list",
+        element: (
+          <PrivateRoute>
+            <HRRoute>
+              <AssetList />
+            </HRRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/asset-add",
+        element: (
+          <PrivateRoute>
+            <HRRoute>
+              <AssetAdd />
+            </HRRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "edit-asset/:id",
+        element: (
+          <PrivateRoute>
+            <HRRoute>
+              <EditAsset />
+            </HRRoute>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) => {
+          const accessToken = localStorage.getItem("access-token");
+          return fetch(`https://asset-server-mu.vercel.app/assets/${params.id}`, {
+            credentials: "include",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
+        },
+      },
+      {
+        path: "/all-requests",
+        element: (
+          <PrivateRoute>
+            <HRRoute>
+              <AllRequests />
+            </HRRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/employee-list",
+        element: (
+          <PrivateRoute>
+            <HRRoute>
+              <EmployeeList />
+            </HRRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/add-employee",
+        element: (
+          <PrivateRoute>
+            <HRRoute>
+              <AddEmployee /> 
+            </HRRoute>
+          </PrivateRoute>
+        ),
+      },
+      // HR Manager
+
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
         element: <Login></Login>,
       },
-      // Employee Routes
-      {
-        path: "/my-assets",
-        element: <MyAssets></MyAssets>,
-      },
-      {
-        path: "/my-team",
-        element: <MyTeam></MyTeam>,
-      },
-      {
-        path: "/request-asset",
-        element: <RequestAsset></RequestAsset>,
-      },
-      // HR Routes
-      {
-        path: "/asset-list",
-        element: <AssetList></AssetList>,
-      },
-      {
-        path: "/add-asset",
-        element: <AddAsset></AddAsset>,
-      },
-      {
-        path: "/all-request",
-        element: <AllRequest></AllRequest>,
-      },
-      {
-        path: "/my-employee",
-        element: <MyEmployee></MyEmployee>,
-      },
-      {
-        path: "/add-employee",
-        element: <AddEmployee></AddEmployee>,
-      },
-      {
-        path: "/update-asset/:id",
-        element: <UpdateAsset></UpdateAsset>,
-        // loader: ({params} ) => fetch(`https://asset-server-mu.vercel.app/asset/${params.id}`)
-        loader: ({params} ) => fetch(`http://localhost:8000/asset/${params.id}`)
-      },
-      {
-        path: "/payment",
-        element: <Payment></Payment>,
-      },
-      {
-        path: "/profile",
-        element: <Profile></Profile>,
-      },
     ],
-  }
+  },
 ]);
-
-export default router;
