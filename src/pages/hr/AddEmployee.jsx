@@ -192,7 +192,7 @@ function AddEmployee() {
               You have added {usersByCompany.length} employees.
             </h2>
 
-            <p className="text-lg my-2 mb-3">
+            <p className="text-lg my-2 mb-3 text-center">
               <span className="text-primary">
                 {userData?.packages === "basic"
                   ? "You Are Using 5 Members For $5 Package!"

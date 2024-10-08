@@ -25,7 +25,7 @@ function ExtraSections() {
               />
             </div>
             <div>
-              <h3 className="text-2xl font-medium font-bold font-lato py-8 w-5/6 md:w-4/6 md:px-0 px-2 mx-auto text-center">
+              <h3 className="text-2xl font-bold font-lato py-8 w-5/6 md:w-4/6 md:px-0 px-2 mx-auto text-center">
                 Please email us right away if you experience any problems with
                 this software.
               </h3>

@@ -78,8 +78,6 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-AuthProvider.propTypes = {
-  children: PropTypes.node,
-};
+
 
 export default AuthProvider;
