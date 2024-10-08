@@ -24,8 +24,6 @@ function HRRoute({ children }) {
     return <Navigate to="/" state={location.pathname}></Navigate>;
   }
   
-  HRRoute.propTypes = {
-    children: PropTypes.node,
-  };
+  
   
   export default HRRoute;
