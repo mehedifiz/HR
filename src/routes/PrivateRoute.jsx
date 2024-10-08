@@ -20,8 +20,6 @@ function PrivateRoute({ children }) {
   return children;
 }
 
-PrivateRoute.propTypes = {
-  children: PropTypes.node,
-};
+
 
 export default PrivateRoute;
