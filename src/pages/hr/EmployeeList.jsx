@@ -115,7 +115,7 @@ function EmployeeList() {
             </Link>
           </div>
         ) : (
-          <div className="template-container">
+          <div className="container mx-auto">
             <div className="text-center">
               <SectionTitle sectionTitle={"My Employee List"} />
               {/* Data Table */}

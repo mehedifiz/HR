@@ -170,7 +170,7 @@ function MyAssets() {
                 <button
                   onClick={() => handlePrint(row)}
                   type="button"
-                  className="p-2 text-base rounded-md bg-light-blue-400 text-white"
+                  className="p-2 text-base rounded-md bg-light-blue-400"
                 >
                   Print
                 </button>

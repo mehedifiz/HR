@@ -62,18 +62,18 @@ function AssetAdd() {
             <Link to="/payment">
               <PrimaryButton
                 buttonName={"Go For Payment"}
-                buttonBGColor={"bg-green-700"}
+                buttonBGColor={"bg-blue-700"}
                 buttonTextColor={"text-white"}
               />
             </Link>
           </div>
         ) : (
-          <div className="template-container">
+          <div className="container mx-auto">
             <div className="text-center">
               <SectionTitle sectionTitle={"Add an Asset"} />
             </div>
             <form
-              className="mt-6 w-full md:w-2/3 mx-auto"
+              className="mt-6 w-full lg:w-2/6 md:w-4/6 mx-auto md:px-0 px-2"
               onSubmit={handleSubmit}
             >
               <div className="mb-3">
@@ -93,7 +93,7 @@ function AssetAdd() {
                 <select
                   required
                   name="product_type"
-                  className="w-full p-2 border border-green-700 rounded-md text-lg"
+                  className="w-full p-2 border rounded-md text-lg"
                 >
                   <option value="" selected disabled>
                     Select Option

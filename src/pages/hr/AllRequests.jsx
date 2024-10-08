@@ -170,14 +170,14 @@ function AllRequests() {
             </Link>
           </div>
         ) : (
-          <div className="template-container">
+          <div className="container mx-auto">
             <div className="text-center">
               <SectionTitle sectionTitle={"All Requests"} />
             </div>
             <div className="w-full max-w-[320px] relative">
               <input
                 type="text"
-                className="p-2 rounded-md border border-green-700 w-full"
+                className="p-2 rounded-md border border-blue-700 w-full"
                 placeholder="Search By Name/Email"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
