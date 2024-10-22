@@ -24,8 +24,6 @@ function EmployeeRoute({ children }) {
     return <Navigate to="/" state={location.pathname}></Navigate>;
   }
   
-  EmployeeRoute.propTypes = {
-    children: PropTypes.node,
-  };
+  
   
   export default EmployeeRoute;
