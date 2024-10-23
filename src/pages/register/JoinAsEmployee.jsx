@@ -348,7 +348,7 @@ function JoinAsEmployee() {
             </form>
             <p className="mb-1 font-roboto text-center text-lg">Or Signup With Google</p>
             <span onClick={handleCreateUserByGoogle}>
-              <GoogleButton />
+              
             </span>
           </div>
         </div>

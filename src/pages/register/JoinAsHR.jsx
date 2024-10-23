@@ -206,7 +206,12 @@ function JoinAsHR() {
                   </label>
                 </div>
               </div>
-              
+              <PrimaryButton
+                buttonType={"submit"}
+                buttonName={"SignUp"}
+                buttonTextColor={"text-white"}
+                buttonBGColor={"bg-primary"}
+              />
             </form>
           </div>
         </div>
