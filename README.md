@@ -1,8 +1,67 @@
-# React + Vite
+# Asset Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Visit the live site [Asset Hub](https://asset-management-c4990.web.app/)
 
-Currently, two official plugins are available:
+## Project Overview
+- **Concept**: Any company can use this web app by
+purchasing a subscription. The main goal of this software is to make it easy for HR
+Managers to track how employees are using company assets.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- CRUD operations are implemented using Node.js with Express.js. Implemented pagination
+bottom of all the tables through backend to prevent loading all data at once. It helps in
+reducing the load on the server and the client, improving performance and user experience.
+- A secure payment system (Stripe API) is included so that the HR user can make the payment
+after purchasing the package to start the process. It will be stored with all the information in
+the database through the backend.
+Used TanStack Query to simplifies data fetching with declarative APIs, reducing boilerplate
+code. It automatically caches server responses to enhance performance and updates stale
+data in the background for real-time synchronization. With support for optimistic updates, it
+ensures a smooth user experience by updating the UI immediately.
+
+## Technology Used
+**React.js**, **Tailwind**, **MongoDB**, **Node.js**, **Express.js**, **Tanstack Query**, **JWT**, **Firebase**
+
+## How to Clone and Run Locally
+
+### Frontend
+1. **Clone the repository**:
+   ```sh
+   git clone https://github.com/developer-fahad/asset-management-client.git
+
+2. **Open with Vs code from directory**:
+   ```sh
+   cd /your-project-directory
+
+3. **Install dependencies**:
+   ```sh
+   npm install
+
+4. **Set up environment variables**:
+   - Create a .env file in the frontend directory. 
+   - Add necessary Firebase config keys.
+
+5. **Start the development server**:
+   ```sh
+   npm run dev
+
+### Backend
+1. **Navigate to backend directory**:
+   ```sh
+   cd turio/backend
+
+2. **Install dependencies**:
+   ```sh
+   npm install
+
+3. **Set up environment variables**:  
+   - Create a .env file in the  backend directory..  
+   - Add MongoDB credentials and any other necessary configurations.
+
+4. **Access the backend API**:
+   ```sh
+   npm start
+
+
+5. **Access the frontend website**:
+   - Open your browser and go to http://localhost:8000.
