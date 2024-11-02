@@ -201,15 +201,7 @@ const Profile = () => {
               {user?.email}
             </p>
           </div>
-          <button
-            className={`py-2 font-bold font-roboto px-5 text-white ${
-              isSubmitDisabled ? "bg-gray-400" : "bg-primary"
-            }`}
-            type="submit"
-            disabled={isSubmitDisabled}
-          >
-            Update Profile
-          </button>
+          
         </form>
       </div>
     </div>
