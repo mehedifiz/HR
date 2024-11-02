@@ -24,7 +24,6 @@ ensures a smooth user experience by updating the UI immediately.
 
 ## How to Clone and Run Locally
 
-### Frontend
 1. **Clone the repository**:
    ```sh
    git clone https://github.com/developer-fahad/asset-management-client.git
@@ -44,24 +43,3 @@ ensures a smooth user experience by updating the UI immediately.
 5. **Start the development server**:
    ```sh
    npm run dev
-
-### Backend
-1. **Navigate to backend directory**:
-   ```sh
-   cd turio/backend
-
-2. **Install dependencies**:
-   ```sh
-   npm install
-
-3. **Set up environment variables**:  
-   - Create a .env file in the  backend directory..  
-   - Add MongoDB credentials and any other necessary configurations.
-
-4. **Access the backend API**:
-   ```sh
-   npm start
-
-
-5. **Access the frontend website**:
-   - Open your browser and go to http://localhost:8000.
