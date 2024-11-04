@@ -31,7 +31,7 @@ function Payment() {
             <div>
               <div>
                 <Elements stripe={stripePromise}>
-                  <PaymentForm />
+                  
                 </Elements>
               </div>
             </div>

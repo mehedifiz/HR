@@ -115,7 +115,7 @@ function Login() {
           </form>
           <p className="font-roboto text-center mb-2">Or Login With Google</p>
           <span onClick={handleCreateUserByGoogle}>
-            
+            <GoogleButton />
           </span>
         </div>
       </div>
