@@ -17,7 +17,7 @@ function IncreaseLimit() {
           </div>
           <div className="w-full lg:w-2/6 md:w-3/6 mx-auto md:px-0 px-2">
             <Elements stripe={stripePromise}>
-              <IncreaseForm />
+              
             </Elements>
           </div>
         </div>
