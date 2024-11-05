@@ -113,12 +113,7 @@ function AssetAdd() {
                 />
               </div>
               <div className="text-center">
-                <PrimaryButton
-                  buttonType={"submit"}
-                  buttonName={"Add"}
-                  buttonBGColor={"bg-primary"}
-                  buttonTextColor={"text-white"}
-                />
+                
               </div>
             </form>
           </div>

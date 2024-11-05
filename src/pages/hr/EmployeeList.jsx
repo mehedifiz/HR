@@ -120,7 +120,12 @@ function EmployeeList() {
               <SectionTitle sectionTitle={"My Employee List"} />
               {/* Data Table */}
               <div className="mt-2">
-                
+                <DataTable
+                  columns={columns}
+                  data={usersByCompany}
+                  pagination
+                  highlightOnHover
+                />
               </div>
             </div>
           </div>
