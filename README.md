@@ -24,13 +24,14 @@ ensures a smooth user experience by updating the UI immediately.
 
 ## How to Clone and Run Locally
 
+### Frontend
 1. **Clone the repository**:
    ```sh
    git clone https://github.com/developer-fahad/asset-management-client.git
 
 2. **Open with Vs code from directory**:
    ```sh
-   cd /your-project-directory
+   cd /your-cloned-project-directory
 
 3. **Install dependencies**:
    ```sh
@@ -43,3 +44,29 @@ ensures a smooth user experience by updating the UI immediately.
 5. **Start the development server**:
    ```sh
    npm run dev
+
+
+   ### Backend
+1. **Clone the repository**:
+   ```sh
+   git clone https://github.com/developer-fahad/asset-management-server.git
+
+1. **Navigate to backend directory**:
+   ```sh
+   cd /your-cloned-project-directory
+
+3. **Install dependencies**:
+   ```sh
+   npm install
+
+4. **Set up environment variables**:  
+   - Create a .env file in the  backend directory..  
+   - Add MongoDB credentials and any other necessary configurations.
+
+5. **Run the backend server**:
+   ```sh
+   npm start
+
+
+6. **Access the frontend website**:
+   - Open your browser and go to http://localhost:8000.
