@@ -59,12 +59,7 @@ function MyTeam() {
             <SectionTitle sectionTitle={"My Team"} />
             {/* Data Table */}
             <div className="mt-2">
-              <DataTable
-                columns={columns}
-                data={usersByCompany}
-                pagination
-                highlightOnHover
-              />
+              
             </div>
           </div>
         </div>
