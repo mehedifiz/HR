@@ -1,8 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "./useAxiosSecure";
+import useAxiosPublic from "./useAxiosPublic";
+import useAuth from "./useAuth";
 
 function useAssets() {
-  const axiosSecure = useAxiosSecure();
+  const axiosSecure = useAxiosPublic();
+  const { user } = useAuth();
+
+  console.log("User Email in frontend:", user?.email); // Log the email in the frontend to check
 
   const {
     data: assets = [],
@@ -11,9 +15,13 @@ function useAssets() {
     isError,
     error,
   } = useQuery({
-    queryKey: ["assets"],
+    queryKey: ["assets", user?.email],
     queryFn: async () => {
-      const response = await axiosSecure.get("/assets");
+      if (!user?.email) {
+        throw new Error("User email is not available");
+      }
+
+      const response = await axiosSecure.get(`/assets?userEmail=${user?.email}`);
       return response.data;
     },
   });

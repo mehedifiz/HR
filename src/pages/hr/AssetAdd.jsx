@@ -7,10 +7,11 @@ import PageTitle from "../../components/pageTitle/PageTitle";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useUserData from "../../hooks/useUserData";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 function AssetAdd() {
     const { userData } = useUserData();
-    const axiosSecure = useAxiosSecure();
+    const axiosSecure = useAxiosPublic();
     const navigate = useNavigate();
   
     const handleSubmit = async (e) => {
@@ -26,7 +27,7 @@ function AssetAdd() {
         product_type: productType,
         product_quantity: productQuantity,
         creator_name: userData.name,
-        creator_email: userData.email,
+        userEmail: userData?.email,
         company_name: userData.company_name,
         created_date: new Date().toISOString(),
       };

@@ -42,7 +42,7 @@ function AssetList() {
               text: "Your asset has been deleted.",
               icon: "success",
             });
-            refetch(); // Refetch data after successful deletion
+            refetch(); 
           },
           onError: () => {
             Swal.fire({

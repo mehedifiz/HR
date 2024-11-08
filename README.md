@@ -69,4 +69,4 @@ ensures a smooth user experience by updating the UI immediately.
 
 
 6. **Access the frontend website**:
-   - Open your browser and go to http://localhost:8000.
+   - Open your browser and go to http://localhost:2000.

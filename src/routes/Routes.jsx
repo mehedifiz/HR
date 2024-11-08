@@ -124,7 +124,7 @@ export const router = createBrowserRouter([
         ),
         loader: ({ params }) => {
           const accessToken = localStorage.getItem("access-token");
-          return fetch(`https://asset-server-mu.vercel.app/assets/${params.id}`, {
+          return fetch(`http://localhost:2000/assets/${params.id}`, {
             credentials: "include",
             headers: {
               Authorization: `Bearer ${accessToken}`,

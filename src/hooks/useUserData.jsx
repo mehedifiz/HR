@@ -19,13 +19,15 @@ const useUserData = () => {
         const response = await axiosPublic.get(`/users/${user?.email}`);
         return response.data;
       }
+      return {}; // Empty object if no email
     },
-    enabled: !!user?.email,
+    enabled: !!user?.email, // Fetch only if user email is available
     onError: (err) => {
       console.log("Error fetching user data:", err);
     },
   });
 
+  console.log("Data in useUserData:", userData, "isLoading:", isLoading);
   return { userData, isLoading, refetch, isError, error };
 };
 

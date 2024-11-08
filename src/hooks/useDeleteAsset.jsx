@@ -1,9 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
 import useUserData from "./useUserData";
+import useAxiosPublic from "./useAxiosPublic";
 
 function useDeleteAsset(refetch) {
-    const axiosSecure = useAxiosSecure();
+    const axiosSecure = useAxiosPublic();
     const { userData } = useUserData();
   
     const mutation = useMutation({

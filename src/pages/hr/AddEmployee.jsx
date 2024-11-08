@@ -10,9 +10,11 @@ import useUnaffiliatedUsers from "./../../hooks/useUnaffiliatedUsers";
 import useUsersByCompany from "../../hooks/useUsersByCompany";
 import useUserData from "../../hooks/useUserData";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+
 
 function AddEmployee() {
-  const axiosSecure = useAxiosSecure();
+  const axiosSecure = useAxiosPublic();
   const navigate = useNavigate();
   const { userData } = useUserData();
   const { unaffiliatedUsers, isLoading, refetch } = useUnaffiliatedUsers();
@@ -25,7 +27,7 @@ function AddEmployee() {
     premium: 20,
   };
 
-  const currentLimit = packageLimits[userData?.packages] || 0;
+  const currentLimit = packageLimits[userData?.package] || 0;
   const currentEmployees = usersByCompany?.length || 0;
 
   const handleCheckboxChange = (userId) => {
@@ -194,11 +196,11 @@ function AddEmployee() {
 
             <p className="text-lg my-2 mb-3 text-center">
               <span className="text-primary">
-                {userData?.packages === "basic"
+                {userData?.package === "basic"
                   ? "You Are Using 5 Members For $5 Package!"
-                  : userData?.packages === "standard"
+                  : userData?.package === "standard"
                   ? "You Are Using 10 Members For $8 Package!"
-                  : userData?.packages === "premium"
+                  : userData?.package === "premium"
                   ? "You Are Using 20 Members For $15 Package!"
                   : ""}
               </span>

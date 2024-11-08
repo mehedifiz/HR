@@ -1,64 +1,69 @@
-import React, { useRef, useState } from "react";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-// import required modules
-import { Navigation } from "swiper/modules";
-import { Link } from "react-router-dom";
+import React from "react";
 
 const Slider = () => {
   return (
-    <div className="">
-      <Swiper
-        modules={[Navigation]}
-        loop={true}
-        navigation={true}
-        className="mySwiper lg:h-[780px] md:h-[550px] h-[220px] "
-      >
-        <SwiperSlide className="relative">
-          <div className="absolute bg-opacity-75 w-full h-full bg-black ">
-            <div className="container h-full mx-auto md:space-y-5 space-y-1 flex flex-col justify-center items-center ">
-              <h1 className="xl:w-3/6 lg:w-4/6 md:w-3/6 w-5/6 font-roboto md:mx-0 mx-auto text-center font-bold lg:text-5xl md:text-3xl text-xl text-white">
-                Shape the Future of Talent Management
-              </h1>
-              <p className="md:text-base text-xs text-center font-lato md:w-2/6 w-4/6 md:mx-0 mx-auto font-thin text-white ">
-                Are you passionate about driving organizational success through
-                strategic HR management? Join us as an HR Manager and lead the
-                way in creating a thriving workplace culture.
+    <div className="relative">
+      {/* Carousel Structure */}
+      <div className="carousel w-full">
+        {/* Item 1 */}
+        <div id="item1" className="carousel-item w-full relative">
+          <img
+            src="https://images.pexels.com/photos/5999834/pexels-photo-5999834.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Tech Lead"
+            className="w-full object-cover h-[500px]"
+          />
+          {/* Overlay with text */}
+          <div className="absolute inset-0 bg-opacity-60 bg-black flex justify-center items-center text-center text-white p-4">
+            <div className="space-y-4">
+              <h1 className="font-roboto text-4xl font-bold">Innovate Your Career with Cutting-Edge Technology</h1>
+              <p className="font-lato text-lg font-thin">
+                Dive into the world of tech innovation and become a part of a team that is shaping the future. Join us as a Tech Lead and make an impact through groundbreaking projects.
               </p>
-              <Link to="/join-as-hr">
-                <button className="px-3 md:py-3 py-2 lg:text-base md:text-sm text-xs bg-primary text-white font-roboto font-bold uppercase">
-                  Join as HR Manager
-                </button>
-              </Link>
             </div>
           </div>
-          <img src="https://i.ibb.co/Bzt9PRc/hrmanager.jpg" alt="" />
-        </SwiperSlide>
-        <SwiperSlide className="relative">
-          <div className="absolute bg-opacity-75 w-full h-full bg-black ">
-            <div className="container h-full mx-auto md:space-y-5 space-y-1 flex flex-col justify-center items-center ">
-              <h1 className="xl:w-3/6 lg:w-4/6 md:w-3/6 w-5/6 font-roboto md:mx-0 mx-auto text-center font-bold lg:text-5xl md:text-3xl text-xl text-white">
-                Embark on a Rewarding Career Journey
-              </h1>
-              <p className="md:text-base text-xs text-center font-lato md:w-2/6 w-4/6 md:mx-0 mx-auto font-thin text-white ">
-                Are you passionate about driving organizational success through
-                strategic HR management? Join us as an HR Manager and lead the
-                way in creating a thriving workplace culture.
+        </div>
+        {/* Item 2 */}
+        <div id="item2" className="carousel-item w-full relative">
+          <img
+            src="https://images.pexels.com/photos/5999834/pexels-photo-5999834.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Growth Coach"
+            className="w-full object-cover h-[500px]"
+          />
+          {/* Overlay with text */}
+          <div className="absolute inset-0 bg-opacity-60 bg-black flex justify-center items-center text-center text-white p-4">
+            <div className="space-y-4">
+              <h1 className="font-roboto text-4xl font-bold">Unlock Your Potential in Personal Growth</h1>
+              <p className="font-lato text-lg font-thin">
+                Take the first step towards unlocking your full potential. Join us as a Growth Coach and help others achieve their personal and professional goals.
               </p>
-              <Link to="/join-as-employee">
-                <button className="px-3 md:py-3 py-2 lg:text-base md:text-sm text-xs bg-primary text-white font-roboto font-bold uppercase">
-                  Join as Employee
-                </button>
-              </Link>
             </div>
           </div>
-          <img src="https://i.ibb.co/tHvMPQq/employee.jpg" alt="" />
-        </SwiperSlide>
-      </Swiper>
+        </div>
+        {/* Item 3 */}
+        {/* <div id="item3" className="carousel-item w-full">
+          <img
+            src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
+            alt="Image 3"
+            className="w-full object-cover h-[500px]"
+          />
+        </div> */}
+        {/* Item 4 */}
+        {/* <div id="item4" className="carousel-item w-full">
+          <img
+            src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
+            alt="Image 4"
+            className="w-full object-cover h-[500px]"
+          />
+        </div> */}
+      </div>
+
+      {/* Navigation Buttons */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 py-2 z-10">
+        <a href="#item1" className="btn btn-xs">1</a>
+        <a href="#item2" className="btn btn-xs">2</a>
+        <a href="#item3" className="btn btn-xs">3</a>
+        <a href="#item4" className="btn btn-xs">4</a>
+      </div>
     </div>
   );
 };

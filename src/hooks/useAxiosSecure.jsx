@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: 'https://asset-server-mu.vercel.app',
+  baseURL: 'http://localhost:2000',
 });
 
 function useAxiosSecure() {
@@ -13,7 +13,7 @@ function useAxiosSecure() {
   axiosSecure.interceptors.request.use(
     function (config) {
       const token = localStorage.getItem("access-token");
-      //   console.log("interceptor", token);
+        console.log("interceptor", token);
       config.headers.authorization = `Bearer ${token}`;
       return config;
     },

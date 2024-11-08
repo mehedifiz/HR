@@ -9,12 +9,13 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useRequestedAssets from "../../hooks/useRequestedAssets";
 import { useState } from "react";
 import useUserData from "../../hooks/useUserData";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 function AllRequests() {
     const { userData } = useUserData();
     const [searchTerm, setSearchTerm] = useState("");
     const { requestedAssets, refetch, isLoading } = useRequestedAssets();
-    const axiosSecure = useAxiosSecure();
+    const axiosSecure = useAxiosPublic();
   
     let filtered = requestedAssets.filter(
       (requestedAsset) =>

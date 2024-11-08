@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "assetmanage",
     "public": "dist",
     "ignore": [
       "firebase.json",

@@ -14,7 +14,9 @@ import PendingRequestsInHome from "../../components/hr-home/PendingRequestsInHom
 import TopRequestedItems from "../../components/hr-home/TopRequestedItems";
 import LimitedStock from "../../components/hr-home/LimitedStock";
 import HRChart from "../../components/hr-home/HRChart";
-import ExtraSections from "../../components/hr-home/ExtraSections";
+import WhyUs from "./about/About";
+import ReviewsSection from "../../components/hr-home/ExtraSections";
+import Banner from "../../components/hr-home/Banner";
 
 function Home() {
   const { user } = useAuth();
@@ -35,7 +37,7 @@ function Home() {
       {!user && (
         <>
           <Slider></Slider>
-          <About></About>
+          <WhyUs/>
           <Package></Package>
         </>
       )}
@@ -58,11 +60,11 @@ function Home() {
 
       {isHR && (
         <>
+        <Banner/>
           <PendingRequestsInHome />
           <TopRequestedItems />
           <LimitedStock />
           <HRChart />
-          <ExtraSections />
         </>
       )}
     </>
