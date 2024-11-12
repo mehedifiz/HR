@@ -55,25 +55,29 @@ function JoinAsHR({
       return;
     }
 
-    try {
-      // const formData = new FormData();
-      // formData.append("image", imageFile);
-      // const imgResponse = await axios.post(
-      //   `https://api.imgbb.com/1/upload?key=03a11aecd3b3e6c79ffffb5deacd2888`,
-      //   formData
-      // );
-
-      const userInfo = {
-        name,
-        email,
-        password,
-        company_logo: 'https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg',
-        dob,
-        company_name: companyName,
-        package: packageType,
-        role: "hr",
-        payment_status: false,
-      };
+    
+      const formData = new FormData();
+      formData.append("image", imageFile);
+      
+      try {
+        const imgResponse = await axios.post(
+          `https://api.imgbb.com/1/upload?key=03a11aecd3b3e6c79ffffb5deacd2888`,
+          formData
+        );
+      
+        const imageUrl = imgResponse.data.data.display_url;
+      
+        const userInfo = {
+          name,
+          email,
+          password,
+          company_logo: imageUrl, 
+          dob,
+          company_name: companyName,
+          package: packageType,
+          role: "hr",
+          payment_status: false,
+        };
 
       const { data: userResponse } = await axiosPublic.post("/users", userInfo);
       if (userResponse.insertedId) {

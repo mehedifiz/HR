@@ -11,7 +11,6 @@ const Root = () => {
         <Outlet></Outlet>
       </div>
 
-      <TestimonialsSection />
 
       <Footer></Footer>
     </div>

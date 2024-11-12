@@ -1,149 +1,32 @@
-// import React, { useContext, useEffect } from 'react';
-// import { useForm } from 'react-hook-form';
-// import { AuthContext } from '../../providers/AuthProvider';
-
-// const Profile = () => {
-//     const { user, updateUserProfile } = useContext(AuthContext);
-//     const { register, handleSubmit, reset, setValue } = useForm();
-
-//     useEffect(() => {
-//         if (user) {
-//             setValue('displayName', user.displayName);
-//             setValue('email', user.email);
-//         }
-//     }, [user, setValue]);
-
-//     const onSubmit = (data) => {
-//         updateUserProfile(data.displayName, user?.photoURL)
-//             .then(() => {
-//                 console.log('Name updated successfully');
-//                 // Optionally, update context or state
-//             })
-//             .catch((error) => {
-//                 console.error('Error updating name:', error);
-//             });
-//     };
-
-//     return (
-//         <div className='min-h-screen container mx-auto flex justify-center items-center'>
-//             <div className='lg:w-4/12 md:w-5/12 w-full flex flex-col justify-center items-center shadow-xl py-12 border'>
-//                 <img className='w-24 h-24 rounded-full' src={user?.photoURL} alt="" />
-//                 <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col items-center space-y-3'>
-//                     <div>
-//                         <input
-//                             className='text-center border-b focus:outline-none'
-//                             type="text"
-//                             {...register('displayName')}
-//                             name="displayName"
-//                             id="displayName"
-//                         />
-//                     </div>
-//                     <div>
-//                         <p className='text-center border-none bg-blue-50 px-2'>{user?.email}</p>
-//                     </div>
-//                     <button className='py-2 font-bold font-roboto px-5 bg-primary text-white' type="submit">Update Profile</button>
-//                 </form>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Profile;
-
-// import React, { useContext, useEffect } from 'react';
-// import { useForm } from 'react-hook-form';
-// import { AuthContext } from '../../providers/AuthProvider';
-// import Swal from 'sweetalert2';
-
-// const Profile = () => {
-//     const { user, updateUserProfile } = useContext(AuthContext);
-//     const { register, handleSubmit, reset, setValue, watch } = useForm();
-
-//     useEffect(() => {
-//         if (user) {
-//             setValue('displayName', user.displayName);
-//             setValue('email', user.email);
-//         }
-//     }, [user, setValue]);
-
-//     const onSubmit = (data) => {
-//         updateUserProfile(data.displayName, user?.photoURL)
-//             .then(() => {
-//                 Swal.fire({
-//                     position: 'center',
-//                     icon: 'success',
-//                     title: 'Profile updated successfully!',
-//                     showConfirmButton: false,
-//                     timer: 1500,
-//                 });
-//                 console.log('Name updated successfully');
-//                 // Optionally, update context or state
-//             })
-//             .catch((error) => {
-//                 console.error('Error updating name:', error);
-//             });
-//     };
-
-//     const displayNameValue = watch('displayName');
-
-//     const isSubmitDisabled = user?.displayName === displayNameValue;
-
-//     return (
-//         <div className='min-h-screen container mx-auto flex justify-center items-center'>
-//             <div className='lg:w-4/12 md:w-5/12 w-full flex flex-col justify-center items-center shadow-xl py-12 border'>
-//                 <img className='w-24 h-24 rounded-full' src={user?.photoURL} alt="" />
-//                 <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col items-center space-y-3'>
-//                     <div>
-//                         <input
-//                             className='text-center border-b focus:outline-none'
-//                             type="text"
-//                             {...register('displayName')}
-//                             name="displayName"
-//                             id="displayName"
-//                         />
-//                     </div>
-//                     <div>
-//                         <p className='text-center border-none bg-blue-50 px-2'>{user?.email}</p>
-//                     </div>
-//                     <button
-//                         className={`py-2 font-bold font-roboto px-5 text-white ${isSubmitDisabled ? 'bg-gray-400' : 'bg-primary'}`}
-//                         type="submit"
-//                         disabled={isSubmitDisabled}
-//                     >
-//                         Update Profile
-//                     </button>
-//                 </form>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Profile;
-
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { Avatar } from "@material-tailwind/react";
+import useUserData from "../../hooks/useUserData";
 
 const Profile = () => {
-  const { user, setUser, updateUserProfile } = useContext(AuthContext); // Assuming setUser is available to update user context
-  const { register, handleSubmit, reset, setValue, watch } = useForm();
+  const { user, setUser, updateUserProfile } = useContext(AuthContext);
+  const { register, handleSubmit, setValue, watch } = useForm();
 
+  const {photoURL} = useUserData()
+  const userData = useUserData(); 
+  console.log(userData)
   useEffect(() => {
     if (user) {
-      setValue("displayName", user.displayName);
-      setValue("email", user.email);
+      // Prepopulate form with existing user data
+      setValue("fullName", user.displayName);
     }
   }, [user, setValue]);
 
   const onSubmit = (data) => {
-    updateUserProfile(data.displayName, user?.photoURL)
+    // Call the function to update the user profile
+    updateUserProfile(data.fullName, user?.photoURL)
       .then(() => {
-        // Update user context or state here
+        // Update user context or state after successful update
         setUser((prevUser) => ({
           ...prevUser,
-          displayName: data.displayName,
+          displayName: data.fullName,
         }));
 
         Swal.fire({
@@ -153,60 +36,51 @@ const Profile = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log("Name updated successfully");
       })
       .catch((error) => {
-        console.error("Error updating name:", error);
+        console.error("Error updating profile:", error);
       });
   };
 
-  const displayNameValue = watch("displayName");
-
-  const isSubmitDisabled = user?.displayName === displayNameValue;
-
   return (
-    <div className="min-h-screen container mx-auto flex justify-center items-center">
-      <div className="lg:w-4/12 md:w-5/12 w-full flex flex-col justify-center items-center shadow-xl py-12 border">
-        {/* <img className=" rounded-full" src={user?.photoURL} alt="" /> */}
+    <div className="min-h-screen bg-gray-50 flex justify-center items-center py-10">
+      <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6 flex flex-col justify-center items-center space-y-6">
         {user && (
-          <>
-            <div className="pb-3 flex justify-center items-center">
-              <Avatar
-                className="w-24 h-24"
-                src={
-                  user?.photoURL
-                    ? user?.photoURL
-                    : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/2048px-Missing_avatar.svg.png"
-                }
-                alt="avatar"
-              />
-            </div>
-          </>
-        )}
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="w-full flex flex-col items-center space-y-3"
-        >
-          <div>
-            <input
-              className="text-center border-b focus:outline-none px-2"
-              type="text"
-              {...register("displayName")}
-              name="displayName"
-              id="displayName"
+          <div className="flex justify-center items-center pb-4">
+            <Avatar
+              className="w-32 h-32 rounded-full border-4 border-primary"
+              src={
+                photoURL ?photoURL 
+                  : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/2048px-Missing_avatar.svg.png"
+              }
+              alt="User Avatar"
             />
           </div>
-          <div>
-            <p className="text-center border-none bg-blue-50 px-2">
-              {user?.email}
-            </p>
+        )}
+
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full flex flex-col items-center space-y-4"
+        >
+          {/* Full Name (Editable) */}
+          <div className="w-full">
+            <input
+              className="w-full border-b px-3 py-2 focus:outline-none"
+              type="text"
+              placeholder="Full Name"
+              {...register("fullName")}
+            />
           </div>
+
+          {/* Email (Read-Only) */}
+          <div className="w-full">
+            <p className="text-gray-500 px-3 py-2 border-b">{user?.email}</p>
+          </div>
+
+          {/* Update Button */}
           <button
-            className={`py-2 font-bold font-roboto px-5 text-white ${
-              isSubmitDisabled ? "bg-gray-400" : "bg-primary"
-            }`}
+            className="w-full bg-blue-600 text-white py-2 mt-4 rounded-md"
             type="submit"
-            disabled={isSubmitDisabled}
           >
             Update Profile
           </button>

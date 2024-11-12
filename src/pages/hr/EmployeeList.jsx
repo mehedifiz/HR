@@ -9,129 +9,148 @@ import useUserData from "../../hooks/useUserData";
 import { useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useUsersByCompany from "../../hooks/useUsersByCompany";
+import Team from "../../svgs/Team";
 
 function EmployeeList() {
-    const { usersByCompany, isLoading, refetch } = useUsersByCompany();
-    const axiosSecure = useAxiosSecure();
-    const [loading, setLoading] = useState(false);
-    const { userData } = useUserData();
-  
-    const handleRemoveUser = async (userId) => {
-      try {
-        setLoading(true);
-        await axiosSecure.patch(`/users/${userId}`);
-        Swal.fire({
-          icon: "success",
-          title: "Employee Removed!",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        refetch(); // Refresh the user list
-      } catch (error) {
-        console.error("Error updating user:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-  
-    if (isLoading || loading) {
-      return (
-        <div className="flex justify-center mt-5">
-          <Spinner />
-        </div>
-      );
+  const { usersByCompany, isLoading, refetch } = useUsersByCompany();
+  const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
+  const { userData } = useUserData();
+
+  const handleRemoveUser = async (userId) => {
+    try {
+      setLoading(true);
+      await axiosSecure.patch(`/users/${userId}`);
+      Swal.fire({
+        icon: "success",
+        title: "Employee Removed!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      refetch(); // Refresh the user list
+    } catch (error) {
+      console.error("Error updating user:", error);
+    } finally {
+      setLoading(false);
     }
-  
-    const columns = [
-      {
-        name: "#", // Column header for serial number
-        cell: (row, index) => <div>{index + 1}</div>, // Render serial number based on row index
-      },
-      {
-        name: "Member Image",
-        selector: (row) => {
-          return (
-            <img
-              src={
-                row?.profile_image
-                  ? row.profile_image
-                  : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/2048px-Missing_avatar.svg.png"
-              }
-              alt="Image"
-              className="h-[100px] w-[100px] object-cover rounded my-2"
-            />
-          );
-        },
-        sortable: true,
-      },
-      {
-        name: "Member Name",
-        selector: (row) => row?.name,
-        sortable: true,
-      },
-      {
-        name: "Member Type",
-        selector: (row) => {
-          return <p className="uppercase">{row.role}</p>;
-        },
-        sortable: true,
-      },
-      {
-        name: "Action",
-        cell: (row) => {
-          if (row.role === "hr") {
-            return "";
-          } else {
-            return (
-              <div className="py-2 flex justify-center">
-                <button
-                  onClick={() => handleRemoveUser(row._id)}
-                  type="button"
-                  className="p-1 rounded-md bg-red-700 text-white text-base"
-                >
-                  Remove
-                </button>
-              </div>
-            );
-          }
-        },
-      },
-    ];
-  
+  };
+
+  if (isLoading || loading) {
     return (
-      <section className="py-8">
-        <PageTitle title={"Employee List"} />
-        {!userData?.payment_status ? (
-          <div className="text-center">
-            <p className="text-red-700 font-bold text-xl mb-4">
-              You Have To Pay First
-            </p>
-            <Link to="/payment">
-              <PrimaryButton
-                buttonName={"Go For Payment"}
-                buttonBGColor={"bg-primary"}
-                buttonTextColor={"text-white"}
-              />
-            </Link>
-          </div>
-        ) : (
-          <div className="container mx-auto">
-            <div className="text-center">
-              <SectionTitle sectionTitle={"My Employee List"} />
-              {/* Data Table */}
-              <div className="mt-2">
-                <DataTable
-                  columns={columns}
-                  data={usersByCompany}
-                  pagination
-                  highlightOnHover
-                />
-              </div>
-            </div>
-          </div>
-        )}
-      </section>
+      <div className="flex justify-center mt-8">
+        <Spinner className="text-primary" />
+      </div>
     );
   }
-  
-  export default EmployeeList;
+
+  const columns = [
+    {
+      name: "#",
+      cell: (row, index) => <div>{index + 1}</div>,
+      
+      
+    },
+    {
+      name: "Member Image",
+      selector: (row) => {
+        return (
+          <img
+            src={
+              row?.photoURL
+                ? row.photoURL
+                : ""
+            }
+            alt="Image"
+            className="h-[100px] w-[100px] object-cover rounded-full shadow-md"
+          />
+        );
+      },
+      sortable: true,
+    },
+    {
+      name: "Member Name",
+      selector: (row) => row?.name,
+      sortable: true,
+    },
+    {
+      name: "Member Type",
+      selector: (row) => {
+        return <p className="uppercase text-gray-700 font-semibold">{row.role}</p>;
+      },
+      sortable: true,
+    },
+    {
+      name: "Action",
+      cell: (row) => {
+        if (row.role === "hr") {
+          return "";
+        } else {
+          return (
+            <div className="py-2 flex justify-center">
+              <button
+                onClick={() => handleRemoveUser(row._id)}
+                type="button"
+                className="p-2 px-4 rounded-md bg-red-600 text-white font-semibold text-sm hover:bg-red-700 transition duration-200"
+              >
+                Remove
+              </button>
+            </div>
+          );
+        }
+      },
+    },
+  ];
+
+  return (
+    <section className="py-8 bg-gray-50">
+      <PageTitle title={"Employee List"} />
+      {!userData?.payment_status ? (
+        <div className="text-center bg-white p-6 rounded-lg shadow-xl mx-auto max-w-lg mt-6">
+          <p className="text-red-600 font-bold text-xl mb-4">
+            You Need To Pay First
+          </p>
+          <Link to="/payment">
+            <PrimaryButton
+              buttonName={"Proceed to Payment"}
+              buttonBGColor={"bg-primary"}
+              buttonTextColor={"text-white"}
+            />
+          </Link>
+        </div>
+      ) : (
+        <div className="container mx-auto mt-12 px-6">
+          <div className="text-center flex flex-col items-center justify-center  p-8 rounded-lg shadow-sm ">
+            <SectionTitle sectionTitle={"My Employee List"} />
+             <Team/>
+          </div>
+
+          <div className="mt-4 bg-[#bfe8b3] p-6 rounded-lg shadow-lg">
+            {/* Data Table */}
+            <DataTable
+              columns={columns}
+              data={usersByCompany}
+              pagination
+              highlightOnHover
+              customStyles={{
+                headCells: {
+                  style: {
+                    backgroundColor: "#aab18d",
+                    color: "black",
+                    fontWeight: "bold",
+                  },
+                },
+                rows: {
+                  style: {
+                    cursor: "pointer",
+                  },
+                },
+              }}
+            />
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+export default EmployeeList;

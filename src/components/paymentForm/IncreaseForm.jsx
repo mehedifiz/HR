@@ -7,7 +7,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import useUserData from "../../hooks/useUserData";
 import useAuth from "../../hooks/useAuth";
-import Marquee from "react-fast-marquee";
+import Paymentscg from "../../svgs/Paymentscg";
 
 function IncreaseForm() {
   const { user } = useAuth();
@@ -117,14 +117,14 @@ function IncreaseForm() {
         try {
           const res = await axiosSecure.put("/payments", payment);
           if (res.data?.paymentResult?.insertedId) {
+            refetch();
+            navigate("/add-employee");
             Swal.fire({
               icon: "success",
               title: "Payment Done!",
               showConfirmButton: false,
               timer: 1500,
             });
-            refetch();
-            navigate("/add-employee");
           }
         } catch (err) {
           console.error("Error updating payment:", err);
@@ -143,20 +143,12 @@ function IncreaseForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="space-y-6">
       {totalPrice === 0 ? (
-        <>
-          <Marquee className="mb-3 bg-gray-200 py-2 font-lato">
-            <p className="ml-8">Select at least one package to proceed.</p>
-            <p className="ml-8">Select at least one package to proceed.</p>
-            <p className="ml-8">Select at least one package to proceed.</p>
-            <p className="ml-8">Select at least one package to proceed.</p>
-            <p className="ml-8">Select at least one package to proceed.</p>
-            <p className="ml-8">Select at least one package to proceed.</p>
-            <p className="ml-8">Select at least one package to proceed.</p>
-            <p className="ml-8">Select at least one package to proceed.</p>
-          </Marquee>
-        </>
+       <div>
+         <p className="mb-3 text-center text-gray-500">Please select a package to proceed with the payment.</p>
+         
+       </div>
       ) : (
         <p className="mb-3 text-center">Total Payment: ${totalPrice}</p>
       )}
@@ -177,6 +169,7 @@ function IncreaseForm() {
           <option value="premium">20 Members for $15</option>
         </select>
       </div>
+
       <div className="border border-blue-700 p-2 rounded-md shadow">
         <CardElement
           options={{
@@ -195,7 +188,9 @@ function IncreaseForm() {
           }}
         />
       </div>
+
       <div className="text-center">
+
         <button
           className={`px-5 uppercase font-bold rounded-md mt-5 py-2 bg-primary text-white ${
             totalPrice === 0 ? "cursor-not-allowed disabled opacity-50" : ""
@@ -203,12 +198,13 @@ function IncreaseForm() {
           type="submit"
           disabled={!stripe || !clientSecret || totalPrice === 0}
         >
-          Pay to increase
+          Pay to Increase
         </button>
       </div>
+
       <p className="text-red-600">{error}</p>
       {transactionId && (
-        <p className="text-green-600">Your transaction id: {transactionId}</p>
+        <p className="text-green-600">Your transaction ID: {transactionId}</p>
       )}
     </form>
   );

@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 import useDeleteAsset from "./../../hooks/useDeleteAsset";
 import useAssets from "./../../hooks/useAssets";
 import useUserData from "../../hooks/useUserData";
+import { FaDeleteLeft, FaTrash } from "react-icons/fa6";
+import { MdUpdate } from "react-icons/md";
 
 function AssetList() {
   const { userData } = useUserData();
@@ -58,6 +60,7 @@ function AssetList() {
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
+    console.log(e.target.value)
   };
 
   const handleFilter = (e) => {
@@ -70,21 +73,22 @@ function AssetList() {
 
   const filteredAssets = useMemo(() => {
     let filtered = assets;
-
+  
+    // Check if the user data is available and filter based on company name
     if (userData?.company_name) {
       filtered = filtered.filter(
         (asset) => asset.company_name === userData.company_name
       );
     }
-
-    // Search functionality
+  
+    // Apply search filter
     if (searchTerm) {
       filtered = filtered.filter((asset) =>
         asset.product_name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-
-    // Filter functionality
+  
+    // Apply other filters like Available, Out of Stock, etc.
     if (filter) {
       if (filter === "Available") {
         filtered = filtered.filter((asset) => asset.product_quantity > 0);
@@ -100,8 +104,8 @@ function AssetList() {
         );
       }
     }
-
-    // Sort functionality
+  
+    // Sort functionality (if needed)
     if (sort) {
       if (sort === "1 To 10") {
         filtered = filtered.filter(
@@ -117,9 +121,10 @@ function AssetList() {
         );
       }
     }
-
+  
     return filtered;
-  }, [assets, searchTerm, filter, sort, userData.company_name]);
+  }, [assets, searchTerm, filter, sort, userData?.company_name]);
+  
 
   const columns = [
     {
@@ -155,14 +160,14 @@ function AssetList() {
             type="button"
             className="p-2 rounded-md bg-primary text-white text-lg"
           >
-            Update
+            <MdUpdate/>
           </Link>
           <button
             type="button"
             onClick={() => handleDelete(row._id)}
             className="p-2 rounded-md bg-red-700 text-white text-lg"
           >
-            Delete
+           <FaTrash/>
           </button>
         </div>
       ),
@@ -170,75 +175,84 @@ function AssetList() {
   ];
 
   return (
-    <section className="py-8">
-      <PageTitle title={"Asset List"} />
-      {!userData?.payment_status ? (
-        <div className="text-center">
-          <p className="text-red-700 font-bold text-xl mb-4">
-            You Have To Pay First
-          </p>
-          <Link to="/payment">
-            <PrimaryButton
-              buttonName={"Go For Payment"}
-              buttonBGColor={"bg-primary"}
-              buttonTextColor={"text-white"}
-            />
-          </Link>
+    <section className="py-8 bg-gray-100 shadow-sm">
+    <PageTitle title={"Asset List"} />
+    
+    {!userData?.payment_status ? (
+      <div className="text-center bg-white p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
+        <p className="text-red-600 font-bold text-2xl mb-4">
+          You Need To Pay First
+        </p>
+        <Link to="/payment">
+          <PrimaryButton
+            buttonName={"Go For Payment"}
+            buttonBGColor={"bg-primary"}
+            buttonTextColor={"text-white"}
+          />
+        </Link>
+      </div>
+    ) : (
+      <div className="container mx-auto mt-8">
+        <div className="text-center mb-8">
+          <SectionTitle sectionTitle={"Asset List"} />
         </div>
-      ) : (
-        <div className="container mx-auto">
-          <div className="text-center">
-            <SectionTitle sectionTitle={"Asset List"} />
-          </div>
-          <div className="flex lg:flex-row flex-col gap-6 items-center justify-between mt-12">
-            <div className="w-full max-w-[320px]">
-              <input
-                type="text"
-                value={searchTerm}
-                placeholder="Search Item By Asset Name"
-                onChange={handleSearch}
-                className="w-full p-2 rounded-md border border-blue-500"
-              />
-            </div>
-            <div className="w-full max-w-[320px]">
-              <select
-                className="w-full md:w-[200px] p-2 rounded-md bg-gray-200 text-primary font-normal text-lg"
-                onChange={handleFilter}
-                value={filter}
-              >
-                <option value="">Filter Assets</option>
-                <option value="Available">Available</option>
-                <option value="Out Of Stock">Out Of Stock</option>
-                <option value="Returnable">Returnable</option>
-                <option value="Non-Returnable">Non-Returnable</option>
-              </select>
-            </div>
-            <div className="w-full max-w-[320px]">
-              <select
-                className="w-full p-2 rounded-md bg-gray-200 text-primary font-normal text-lg"
-                onChange={handleSort}
-                value={sort}
-              >
-                <option value="">Sort Assets By Quantity</option>
-                <option value="1 To 10">1 To 10</option>
-                <option value="10 To 20">10 To 20</option>
-                <option value="20 To 30">20 To 30</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Data Table */}
-          <div className="mt-8">
-            <DataTable
-              columns={columns}
-              data={filteredAssets}
-              pagination
-              highlightOnHover
+  
+        <div className="flex flex-col lg:flex-row gap-6 items-center justify-between mb-8">
+          {/* Search Input */}
+          <div className="w-full max-w-sm">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleSearch}
+              placeholder="Search Item By Asset Name"
+              className="w-full p-3 rounded-md border border-gray-300 text-lg focus:ring-primary focus:ring-2"
             />
           </div>
+  
+          {/* Filter Dropdown */}
+          <div className="w-full max-w-sm">
+            <select
+              className="w-full p-3 rounded-md bg-gray-200 text-primary font-semibold text-lg focus:ring-primary focus:ring-2"
+              onChange={handleFilter}
+              value={filter}
+            >
+              <option value="">Filter Assets</option>
+              <option value="Available">Available</option>
+              <option value="Out Of Stock">Out Of Stock</option>
+              <option value="Returnable">Returnable</option>
+              <option value="Non-Returnable">Non-Returnable</option>
+            </select>
+          </div>
+  
+          {/* Sort Dropdown */}
+          <div className="w-full max-w-sm">
+            <select
+              className="w-full p-3 rounded-md bg-gray-200 text-primary font-semibold text-lg focus:ring-primary focus:ring-2"
+              onChange={handleSort}
+              value={sort}
+            >
+              <option value="">Sort Assets By Quantity</option>
+              <option value="1 To 10">1 To 10</option>
+              <option value="10 To 20">10 To 20</option>
+              <option value="20 To 30">20 To 30</option>
+            </select>
+          </div>
         </div>
-      )}
-    </section>
+  
+        {/* Data Table */}
+        <div className="mt-8">
+          <DataTable
+            columns={columns}
+            data={filteredAssets}
+            pagination
+            highlightOnHover
+            className="rounded-lg overflow-hidden shadow-lg"
+          />
+        </div>
+      </div>
+    )}
+  </section>
+  
   );
 }
 

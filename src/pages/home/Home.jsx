@@ -17,6 +17,9 @@ import HRChart from "../../components/hr-home/HRChart";
 import WhyUs from "./about/About";
 import ReviewsSection from "../../components/hr-home/ExtraSections";
 import Banner from "../../components/hr-home/Banner";
+import EmployeeHomePage from "../../Employ-home/Empoly";
+import EmployeeBanner from "../../Employ-home/EmployeeBanner";
+import TestimonialsSection from "../../components/hr-home/ExtraSections";
 
 function Home() {
   const { user } = useAuth();
@@ -39,20 +42,21 @@ function Home() {
           <Slider></Slider>
           <WhyUs/>
           <Package></Package>
+      <TestimonialsSection />
+
         </>
       )}
 
       {isEmployee && (
         <>
-          {!userData?.company_name ? (
-            <h2 className="text-center font-bold text-red-400 text-2xl mt-20">
-              Contact with your HR
-            </h2>
-          ) : (
+          {!userData?.company_name ?  <EmployeeHomePage/>: (
             <>
+            <EmployeeBanner/>
               <PendingRequests />
               <MonthlyRequests />
               <NoticeBoard />
+      <TestimonialsSection />
+
             </>
           )}
         </>
@@ -65,6 +69,8 @@ function Home() {
           <TopRequestedItems />
           <LimitedStock />
           <HRChart />
+      <TestimonialsSection />
+
         </>
       )}
     </>

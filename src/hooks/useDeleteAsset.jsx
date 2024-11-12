@@ -4,7 +4,7 @@ import useUserData from "./useUserData";
 import useAxiosPublic from "./useAxiosPublic";
 
 function useDeleteAsset(refetch) {
-    const axiosSecure = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const { userData } = useUserData();
   
     const mutation = useMutation({

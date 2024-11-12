@@ -6,7 +6,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import useUserData from "../../hooks/useUserData";
 import useAuth from "../../hooks/useAuth";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
+// import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 function PaymentForm() {
   const { user } = useAuth();
@@ -18,7 +18,7 @@ function PaymentForm() {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
-  const axiosPublic = useAxiosPublic()
+  // const axiosPublic = useAxiosPublic()
 
   const getTotalPrice = () => {
     if (!userData?.package) return alert(); 
@@ -39,7 +39,7 @@ function PaymentForm() {
 
   useEffect(() => {
     if (totalPrice > 0 && !clientSecret) {
-      axiosPublic.post("/create-payment-intent", { price: totalPrice })
+      axiosSecure.post("/create-payment-intent", { price: totalPrice })
         .then((res) => {
           setClientSecret(res.data.clientSecret);
         })
@@ -94,7 +94,7 @@ function PaymentForm() {
         payment_status: true,
       };
 
-      const res = await axiosPublic.post("/payments", payment);
+      const res = await axiosSecure.post("/payments", payment);
       console.log('payment data ',res.data.paymentResult)
       if (res.data?.paymentResult.insertedId ) {
         Swal.fire({

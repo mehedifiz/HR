@@ -14,12 +14,14 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 function AddEmployee() {
-  const axiosSecure = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const { userData } = useUserData();
   const { unaffiliatedUsers, isLoading, refetch } = useUnaffiliatedUsers();
   const { usersByCompany } = useUsersByCompany();
   const [selectedUsers, setSelectedUsers] = useState([]);
+
+  console.log(userData.package)
 
   const packageLimits = {
     basic: 5,
@@ -131,12 +133,13 @@ function AddEmployee() {
     {
       name: "Member Image",
       selector: (row) => {
+        console.log(row)
         return (
           <img
             src={
-              row?.profile_image
-                ? row.profile_image
-                : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/2048px-Missing_avatar.svg.png"
+              row?.photoURL
+                ? row.photoURL
+                : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnVzD4rGq42PnjKHt9BkhRdJdAa9ojZ1kByw&s"
             }
             alt="Image"
             className="h-[100px] w-[100px] object-cover rounded my-2"
@@ -158,7 +161,7 @@ function AddEmployee() {
             <button
               onClick={() => handleAddClick(row._id)}
               type="button"
-              className="py-2 px-4 rounded-md uppercase bg-primary font-bold font-roboto text-white "
+              className="py-2 px-4 rounded-md uppercase bg-[#6ac570] font-bold font-roboto text-white "
             >
               Add to team
             </button>
@@ -169,7 +172,7 @@ function AddEmployee() {
   ];
 
   return (
-    <section className="py-8">
+    <section className="py-8 bg-gray-50">
       <PageTitle title={"Add Employee"} />
       {!userData?.payment_status ? (
         <div className="text-center">
@@ -191,7 +194,7 @@ function AddEmployee() {
           </div>
           <div className="flex flex-col justify-center items-center">
             <h2 className="text-lg">
-              You have added {usersByCompany.length} employees.
+              You have added {usersByCompany.length } employees.
             </h2>
 
             <p className="text-lg my-2 mb-3 text-center">
@@ -212,12 +215,27 @@ function AddEmployee() {
             </Link>
           </div>
           {/* Data Table */}
-          <div className="mt-8">
+          <div className="mt-8 bg-[#5fee34]">
             <DataTable
+            
               columns={columns}
               data={unaffiliatedUsers}
               pagination
               highlightOnHover
+              customStyles={{
+                headCells: {
+                  style: {
+                    backgroundColor: "#aab18d",
+                    color: "black",
+                    fontWeight: "bold",
+                  },
+                },
+                rows: {
+                  style: {
+                    cursor: "pointer",
+                  },
+                },
+              }}
             />
           </div>
           {unaffiliatedUsers.length > 0 && (

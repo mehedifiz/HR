@@ -11,7 +11,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 function AssetAdd() {
     const { userData } = useUserData();
-    const axiosSecure = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
   
     const handleSubmit = async (e) => {

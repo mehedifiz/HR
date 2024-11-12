@@ -1,27 +1,40 @@
-import { TiPin } from "react-icons/ti";
+import { TiPin } from "react-icons/ti"; 
 import SectionTitle from "../sectionTitle/SectionTitle";
 import useUserData from "../../hooks/useUserData";
+import Notice from "../../svgs/Notice";
 
 function NoticeBoard() {
   const { userData } = useUserData();
-  console.log(userData);
+  const companyName = userData?.company_name || "Our Company";
+
   return (
     <section className="container mx-auto pb-8">
-      <div className="text-center">
-        <SectionTitle sectionTitle={"Notice"} />
+      <div className="text-center mb-6">
+        <SectionTitle sectionTitle="Notice Board" />
       </div>
-      <div className="py-8 bg-primary text-white space-y-4">
-        <h1 className="text-center"><strong>Dear Valued Employees,</strong></h1>
-        <p className="lg:w-3/6 md:w-5/6 w-full md:px-0 px-2 mx-auto text-center font-roboto">
-          Please be informed that our office will be closed for the next 7 days
-          in observance of Eid Ul Adha. We will be off from 15 June 2024 to 21 June 2024. During this period, all operations and services will be
-          temporarily halted. We will resume our regular business hours on
-          22 June 2024. We appreciate your understanding and wish you a
-          joyous and blessed Eid Ul Adha! Thank you for your cooperation.
+      <div className="relative bg-gradient-to-r from-blue-500 to-purple-500 text-white p-8 rounded-lg shadow-lg space-y-6">
+        {/* Notice SVG at the top */}
+        <div className="flex justify-center mb-4">
+          <Notice className="w-12 h-12 text-white" /> {/* Notice SVG */}
+        </div>
+        
+        {/* Notice Content */}
+        <h1 className="text-center text-2xl font-bold">
+          <strong>Attention All Employees</strong>
+        </h1>
+        <p className="text-center lg:w-3/6 md:w-5/6 w-full md:px-0 px-2 mx-auto font-roboto">
+          We are pleased to announce an important update. Starting from <strong>1st December 2024</strong>, our company will be implementing new initiatives focused on employee growth and professional development. These initiatives include skill-building workshops, wellness programs, and team-building activities. Stay tuned for more details!
         </p>
-        <div>
-          <p className="text-center"><strong>Best Regards,</strong></p>
-          <p className="text-center font-roboto">{userData?.company_name}</p>
+        
+        {/* Closing Message */}
+        <div className="text-center">
+          <p className="text-lg font-semibold">
+            Thank you for your dedication and commitment!
+          </p>
+          <p className="mt-4 font-roboto text-lg">
+            <TiPin className="inline text-2xl mr-1" /> <strong>Best Regards,</strong>
+          </p>
+          <p className="font-roboto text-lg">{companyName}</p>
         </div>
       </div>
     </section>
