@@ -18,22 +18,43 @@ function EmployeeList() {
   const { userData } = useUserData();
 
   const handleRemoveUser = async (userId) => {
-    try {
-      setLoading(true);
-      await axiosSecure.patch(`/users/${userId}`);
-      Swal.fire({
-        icon: "success",
-        title: "Employee Removed!",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      refetch(); // Refresh the user list
-    } catch (error) {
-      console.error("Error updating user:", error);
-    } finally {
-      setLoading(false);
+    // Show confirmation prompt
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to remove this employee? This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, remove",
+      cancelButtonText: "Cancel",
+    });
+  
+    // Check if the user confirmed the action
+    if (result.isConfirmed) {
+      try {
+        setLoading(true);
+        await axiosSecure.patch(`/users/${userId}`);
+        Swal.fire({
+          icon: "success",
+          title: "Employee Removed!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        refetch(); // Refresh the user list
+      } catch (error) {
+        console.error("Error updating user:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Failed to remove employee",
+          text: "Something went wrong. Please try again later.",
+        });
+      } finally {
+        setLoading(false);
+      }
     }
   };
+  
 
   if (isLoading || loading) {
     return (
@@ -58,7 +79,7 @@ function EmployeeList() {
             src={
               row?.photoURL
                 ? row.photoURL
-                : ""
+                : "https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png"
             }
             alt="Image"
             className="h-[100px] w-[100px] object-cover rounded-full shadow-md"

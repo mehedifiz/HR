@@ -13,7 +13,7 @@ function EmployeeBanner() {
   return (
     <div className="relative bg-gradient-to-r from-green-50 to-blue-50 text-gray-700 py-16 px-8 max-w-7xl mx-auto text-center rounded-lg  ">
       {/* Background Image */}
-      <div className="absolute inset-0 bg-cover bg-center opacity-40" style={{ backgroundImage: `url('https://your-image-url.com/employee-banner.jpg')` }}></div>
+      <div className="absolute inset-0 bg-cover bg-center opacity-45" style={{ backgroundImage: `url('https://t4.ftcdn.net/jpg/04/67/93/01/360_F_467930159_UcfrOkjhFG436zoT9fSetYccBgpNkokp.jpg')` }}></div>
 
       {/* Content */}
       <div className="relative z-10">

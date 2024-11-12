@@ -28,7 +28,7 @@ const Footer = () => {
           <p className="text-xs font-semibold">
             123 Digital Avenue, Tech City, Innovation State, 12345
           </p>
-          <p className="text-xs font-semibold">Contact: support@assethub.com | +1 (123) 456-7890</p>
+          <p className="text-xs font-semibold">Contact: support@manageasset.com | +1 (123) 456-7890</p>
 
           {/* Social Media Links */}
           <div className="flex justify-center space-x-4 mt-4 text-primary">

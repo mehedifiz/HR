@@ -6,6 +6,16 @@ This project is an asset management system designed for organizational use. It a
 
 [Live Demo] https://assetmanage.web.app  
 
+   ```js
+// Admin 
+Email: mehedi@hr1.com
+password : Mehedi@hr1.com
+```
+ ```js
+// Empoyee 
+Email: shanto@em1.com
+password : Shanto@em1.com
+```
 ## Features
 
 - **Asset Request and Approval**: Employees can request assets, and HR managers can approve or deny requests.

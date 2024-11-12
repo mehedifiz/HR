@@ -41,7 +41,8 @@ function JoinAsHR({
     const imageFile = form.image.files[0];
 
     if (!imageFile || imageFile.size > 100 * 1024) {
-      Swal.fire({ icon: "error", title: "Image Size Should Be 100 KB or Less" });
+      toast.error("Image Size must Be 100 KB or Less")
+
       setFormLoading(false);
       return;
     }

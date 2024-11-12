@@ -5,7 +5,7 @@ function PageTitle({ title }) {
     return (
       <HelmetProvider>
         <Helmet>
-          <title>{`AssetHub | ${title}`}</title>
+          <title>{`ManageAsset | ${title}`}</title>
         </Helmet>
       </HelmetProvider>
     );
