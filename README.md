@@ -1,72 +1,47 @@
-# Asset Hub
+# Asset Management System
 
-Visit the live site [Asset Hub](https://asset-management-c4990.web.app/)
+This project is an asset management system designed for organizational use. It allows employees to request assets, while HR managers can manage these requests, approve or deny them, and keep track of asset availability and usage.
 
-## Project Overview
-- **Concept**: Any company can use this web app by
-purchasing a subscription. The main goal of this software is to make it easy for HR
-Managers to track how employees are using company assets.
+## Demo
+
+[Live Demo] https://assetmanage.web.app  
 
 ## Features
-- CRUD operations are implemented using Node.js with Express.js. Implemented pagination
-bottom of all the tables through backend to prevent loading all data at once. It helps in
-reducing the load on the server and the client, improving performance and user experience.
-- A secure payment system (Stripe API) is included so that the HR user can make the payment
-after purchasing the package to start the process. It will be stored with all the information in
-the database through the backend.
-Used TanStack Query to simplifies data fetching with declarative APIs, reducing boilerplate
-code. It automatically caches server responses to enhance performance and updates stale
-data in the background for real-time synchronization. With support for optimistic updates, it
-ensures a smooth user experience by updating the UI immediately.
 
-## Technology Used
-**React.js**, **Tailwind**, **MongoDB**, **Node.js**, **Express.js**, **Tanstack Query**, **JWT**, **Firebase**
+- **Asset Request and Approval**: Employees can request assets, and HR managers can approve or deny requests.
+- **Search and Filter Assets**: Easily search and filter assets by name, status, and type.
+- **Real-Time Status Updates**: Asset status updates are visible to employees, and notifications keep users informed.
+- **Role-Based Access**: HR managers and employees have access to different features based on their roles.
+- **Data Export and Print**: HR can print or export approved asset details for documentation.
+- **Dashboard for HR and Employees**: An interactive dashboard displays monthly requests, pending requests, and asset availability.
+- **Responsive and Accessible Design**: A fully responsive design for desktop and mobile devices.
 
-## How to Clone and Run Locally
+## Technologies Used
 
 ### Frontend
-1. **Clone the repository**:
-   ```sh
-   git clone https://github.com/developer-fahad/asset-management-client.git
+- **React**: Core framework for building UI.
+- **React Router**: For seamless navigation between pages.
+- **React Query**: For server-state management.
+- **Axios**: For handling HTTP requests.
+- **Tailwind CSS** & **DaisyUI**: For styling and responsive design.
+- **Material Tailwind**: UI components for consistent styling.
+- **React Hook Form**: For handling forms and validation.
+- **React Data Table Component**: For displaying tabular data with sorting and pagination.
+- **Recharts**: For rendering data visualizations on the dashboard.
+- **SweetAlert2** & **React Toastify**: For notifications and alerts.
+- **Firebase**: For authentication and user management.
 
-2. **Open with Vs code from directory**:
-   ```sh
-   cd /your-cloned-project-directory
+### Packages
+- **Stripe**: Used for secure payment integration (if applicable).
+- **LocalForage**: For offline storage, enhancing user experience.
+- **React Helmet Async**: For managing metadata in the head of the document.
+- **Swiper**: For creating a smooth, swipeable carousel in the UI.
 
-3. **Install dependencies**:
-   ```sh
-   npm install
+### Development Tools
+- **Vite**: Fast build tool for developing modern web applications.
+- **ESLint**: For enforcing code quality.
+- **Tailwind CSS**: Utility-first CSS framework.
+- **DaisyUI**: Components and theming for Tailwind CSS.
+- **Autoprefixer & PostCSS**: For cross-browser compatibility.
 
-4. **Set up environment variables**:
-   - Create a .env file in the frontend directory. 
-   - Add necessary Firebase config keys.
-
-5. **Start the development server**:
-   ```sh
-   npm run dev
-
-
-### Backend
-1. **Clone the repository**:
-   ```sh
-   git clone https://github.com/developer-fahad/asset-management-server.git
-
-1. **Navigate to backend directory**:
-   ```sh
-   cd /your-cloned-project-directory
-
-3. **Install dependencies**:
-   ```sh
-   npm install
-
-4. **Set up environment variables**:  
-   - Create a .env file in the  backend directory..  
-   - Add MongoDB credentials and any other necessary configurations.
-
-5. **Run the backend server**:
-   ```sh
-   npm start
-
-
-6. **Access the frontend website**:
-   - Open your browser and go to https://assetmanage-server.onrender.com.
+ 
